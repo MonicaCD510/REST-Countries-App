@@ -1,5 +1,5 @@
 const container = document.getElementById('countries-container');
-fetch("https://restcountries.com/v3.1/all?fields=name,flags,population")
+fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
   .then(response => response.json())
   .then(data => {
     console.log(data);
@@ -12,6 +12,7 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population")
          <img src="${country.flags.png}" width="100">
           <h2>${country.name.common}</h2>
           <p>Population: ${country.population}</p>
+          <p>Region: ${country.region}</p>
         </div>
       `;
     });
