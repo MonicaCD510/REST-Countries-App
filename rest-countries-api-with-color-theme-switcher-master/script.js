@@ -1,3 +1,16 @@
+function displayCountries(data) {
+  container.innerHTML = "";
+
+  data.forEach(country => {
+    container.innerHTML += `
+      <div>
+        <img src="${country.flags.png}" width="100">
+        <h2>${country.name.common}</h2>
+        <p>Population: ${country.population}</p>
+      </div>
+    `;
+  });
+}
 const container = document.getElementById('countries-container');
 fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
   .then(response => response.json())
