@@ -16,20 +16,6 @@ function displayCountries(data) {
     `;
   });
 }
-function displayCountries(data) {
-  container.innerHTML = "";
-
-  data.forEach(country => {
-    container.innerHTML += `
-      <div>
-        <img src="${country.flags.png}" width="100">
-        <h2>${country.name.common}</h2>
-        <p>Population: ${country.population}</p>
-        <p>Region: ${country.region}</p>
-      </div>
-    `;
-  });
-}
 
 
 function applyFilters() {
