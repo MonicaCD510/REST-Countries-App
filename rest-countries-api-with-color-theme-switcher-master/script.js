@@ -16,6 +16,40 @@ function displayCountries(data) {
     `;
   });
 }
+function displayCountries(data) {
+  container.innerHTML = "";
+
+  data.forEach(country => {
+    container.innerHTML += `
+      <div>
+        <img src="${country.flags.png}" width="100">
+        <h2>${country.name.common}</h2>
+        <p>Population: ${country.population}</p>
+        <p>Region: ${country.region}</p>
+      </div>
+    `;
+  });
+}
+
+
+function applyFilters() {
+  const searchValue = searchInput.value.toLowerCase();
+  const selectedRegion = regionFilter.value;
+
+  let filteredCountries = allCountries;
+
+  if (selectedRegion !== "") {
+    filteredCountries = filteredCountries.filter(country => country.region === selectedRegion);
+  }
+
+  if (searchValue !== "") {
+    filteredCountries = filteredCountries.filter(country =>
+      country.name.common.toLowerCase().includes(searchValue)
+    );
+  }
+
+  displayCountries(filteredCountries);
+}
 
 fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
   .then(response => response.json())
@@ -29,6 +63,8 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
     container.innerHTML = "<p>Error loading data</p>";
   });
   regionFilter.addEventListener('change', () => {
+    applyFilters();
+  });
   const selectedRegion = regionFilter.value;
 
   if (selectedRegion === "") {
@@ -37,8 +73,10 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
     const filteredCountries = allCountries.filter(country => country.region === selectedRegion);
     displayCountries(filteredCountries);
   }
-});
+;
 searchInput.addEventListener('input', () => {
+  applyFilters();
+});
   const searchValue = searchInput.value.toLowerCase();
 
   const filteredCountries = allCountries.filter(country =>
@@ -46,4 +84,4 @@ searchInput.addEventListener('input', () => {
   );
 
   displayCountries(filteredCountries);
-});
+;
