@@ -1,4 +1,5 @@
 const container = document.getElementById('countries-container');
+const regionFilter = document.getElementById('region-filter'); 
 let allCountries = [];// Added
 function displayCountries(data) {
   container.innerHTML = "";
@@ -26,3 +27,13 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
     console.log(error);
     container.innerHTML = "<p>Error loading data</p>";
   });
+  regionFilter.addEventListener('change', () => {
+  const selectedRegion = regionFilter.value;
+
+  if (selectedRegion === "") {
+    displayCountries(allCountries);
+  } else {
+    const filteredCountries = allCountries.filter(country => country.region === selectedRegion);
+    displayCountries(filteredCountries);
+  }
+});
