@@ -1,5 +1,6 @@
 const container = document.getElementById('countries-container');
 const regionFilter = document.getElementById('region-filter'); 
+const searchInput = document.getElementById('search-input');
 let allCountries = [];// Added
 function displayCountries(data) {
   container.innerHTML = "";
@@ -36,4 +37,13 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
     const filteredCountries = allCountries.filter(country => country.region === selectedRegion);
     displayCountries(filteredCountries);
   }
+});
+searchInput.addEventListener('input', () => {
+  const searchValue = searchInput.value.toLowerCase();
+
+  const filteredCountries = allCountries.filter(country =>
+    country.name.common.toLowerCase().includes(searchValue)
+  );
+
+  displayCountries(filteredCountries);
 });
