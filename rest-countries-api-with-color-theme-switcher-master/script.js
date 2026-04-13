@@ -1,5 +1,5 @@
 const container = document.getElementById('countries-container');
-
+let allCountries = [];// Added
 function displayCountries(data) {
   container.innerHTML = "";
 
@@ -18,9 +18,10 @@ function displayCountries(data) {
 fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
   .then(response => response.json())
   .then(data => {
-    console.log(data);
-    displayCountries(data); // ✅ this is where it belongs
-  })
+  console.log(data);
+  allCountries = data; // ADD THIS LINE
+  displayCountries(data);
+})
   .catch(error => {
     console.log(error);
     container.innerHTML = "<p>Error loading data</p>";
