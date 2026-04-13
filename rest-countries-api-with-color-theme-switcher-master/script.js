@@ -7,7 +7,7 @@ function displayCountries(data) {
 
   data.forEach(country => {
     container.innerHTML += `
-      <div>
+      <div onclick="handleClick('${country.name.common}')">
         <img src="${country.flags.png}" width="100">
         <h2>${country.name.common}</h2>
         <p>Population: ${country.population}</p>
@@ -63,11 +63,10 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region")
 searchInput.addEventListener('input', () => {
   applyFilters();
 });
-  const searchValue = searchInput.value.toLowerCase();
-
-  const filteredCountries = allCountries.filter(country =>
-    country.name.common.toLowerCase().includes(searchValue)
-  );
-
-  displayCountries(filteredCountries);
+ 
+  
 ;
+
+function handleClick(name) {
+  console.log(name);
+}
